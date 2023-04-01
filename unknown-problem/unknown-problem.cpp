@@ -1,21 +1,21 @@
 class Solution {
 public:
-    vector<vector<int>> mergeArrays(vector<vector<int>>& nums1, vector<vector<int>>& nums2) {
+    int minNumber(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
         unordered_map<int,int> mp;
-        vector<vector<int>> ans;
-        for(auto i:nums1){
-            mp[i[0]]+=i[1];
-        }
+        int ans=INT_MAX;
+        for(auto i:nums1)
+                mp[i]++;
         for(auto i:nums2){
-            mp[i[0]]+=i[1];
+            if(mp[i]>0)
+                ans=min(ans,i);
         }
-        for(auto i:mp){
-            vector<int> v;
-            v.push_back(i.first);
-            v.push_back(i.second);
-            ans.push_back(v);
-        }
-        sort(ans.begin(),ans.end());
+        int a=nums1[0],b=nums2[0];
+        if(a<b)
+            ans=min(ans,a*10+b);
+        else
+            ans=min(ans,b*10+a);
         return ans;
     }
 };
